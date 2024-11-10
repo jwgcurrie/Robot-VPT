@@ -1,0 +1,74 @@
+---
+title: "VPT with Robots"
+subtitle: 'Response-Time (RT) Analysis: Animate Robot model'
+
+author: 
+- Joel Currie^[University of Aberdeen, j.currie.22@abdn.ac.uk], Katrina Louise McDonough^[University of East Anglia], Agnieszka Wykowska^[Istituto Italiano di Tecnologia], Maria Elena Giannaccini^[University of Aberdeen], Patric Bach^[University of Aberdeen]
+
+
+date: "`r Sys.Date()`"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+eval = TRUE
+knitr::opts_chunk$set(echo = FALSE)
+rm(list = ls())
+library(lme4)
+library(sjPlot)
+library(dplyr)
+```
+
+
+# Human Model:
+
+```{r}
+data <- read.csv("data_preprocessed.csv")
+
+mod_anim_robot_centred <- lmer(RT ~ self_theta_centred * Exposure + other_theta_centred * Exposure + 
+                        (1 + Exposure + self_theta_centred|subject) 
+                      ,data=filter(data, correct == 1, Agent == 'Animate Robot'), control = lmerControl(optimizer = "bobyqa"))
+```
+## Effects of Interest:
+### Self Theta:
+
+```{r}
+plot_model(mod_anim_robot_centred, type = "pred", terms = c("self_theta_centred"))
+```
+
+As can be seen above, RTs  show the expected linear increase as the disparity between self-perspective and stimulus orientation increases ($E = 412.7, CI = [363.2 - 462.3], p < .001$).
+
+### Other Theta:
+
+```{r}
+plot_model(mod_anim_robot_centred, type = "pred", terms = c("other_theta_centred"))
+```
+
+Participants did not take the perspective of the Animate Robot ($E = -0.2, CI = [-18.3 - 17.9], p < .983$). Instead of the predicted linear increase in RTs as stimulus was oriented away from the robot, participants RTs do not seem to be influenced in any way by the perspective of the robot.
+
+## Other Fixed effects and Interactions:
+### Exposure:
+
+```{r}
+plot_model(mod_anim_robot_centred, type = "pred", terms = c("Exposure"))
+```
+
+Generally participants RTs got faster over the course of the experiment, as participants were exposed to more trials they became better at the task ($E = -147.6, CI = [-194.7 - -100.4], p < .001$).  
+
+
+## Model Construciton:
+```{r, echo=T, results='hide'}
+mod_anim_robot_centred <- lmer(RT ~ self_theta_centred * Exposure + other_theta_centred * Exposure + 
+                        (1 + Exposure + self_theta_centred|subject) 
+                      ,data=filter(data, correct == 1, Agent == 'Animate Robot'), control = lmerControl(optimizer = "bobyqa"))
+```
+
+## Output of model:
+```{r}
+tab_model(mod_anim_robot_centred)
+```
+
+
+
+
+

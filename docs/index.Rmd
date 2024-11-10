@@ -65,7 +65,7 @@ We found a small interaction in the between the Human group, other theta and Exp
 
 ## Model Construciton:
 ```{r, echo=T, results='hide'}
-mod_full_cat_center2 <- lmer(RT ~ self_theta_centred * Agent_cat * Exposure + other_theta_centred * Agent_cat * Exposure + 
+lmer(RT ~ self_theta_centred * Agent_cat * Exposure + other_theta_centred * Agent_cat * Exposure + 
                               (1 + Exposure + self_theta_centred + other_theta_centred|subject) 
                             ,data=filter(data, correct == 1), control = lmerControl(optimizer = "bobyqa"))
 ```

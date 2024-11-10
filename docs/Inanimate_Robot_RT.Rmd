@@ -1,0 +1,74 @@
+---
+title: "VPT with Robots"
+subtitle: 'Response-Time (RT) Analysis: Inanimate Robot model'
+
+author: 
+- Joel Currie^[University of Aberdeen, j.currie.22@abdn.ac.uk], Katrina Louise McDonough^[University of East Anglia], Agnieszka Wykowska^[Istituto Italiano di Tecnologia], Maria Elena Giannaccini^[University of Aberdeen], Patric Bach^[University of Aberdeen]
+
+
+date: "`r Sys.Date()`"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+eval = TRUE
+knitr::opts_chunk$set(echo = FALSE)
+rm(list = ls())
+library(lme4)
+library(sjPlot)
+library(dplyr)
+```
+
+
+# Human Model:
+
+```{r}
+data <- read.csv("data_preprocessed.csv")
+
+mod_inam_robot_centred <- lmer(RT ~ self_theta_centred * Exposure + other_theta_centred * Exposure + 
+                        (1 + Exposure + self_theta_centred + other_theta_centred|subject) 
+                      ,data=filter(data, correct == 1, Agent == 'Inanimate Robot'), control = lmerControl(optimizer = "bobyqa"))
+```
+## Effects of Interest:
+### Self Theta:
+
+```{r}
+plot_model(mod_inam_robot_centred, type = "pred", terms = c("self_theta_centred"))
+```
+
+As can be seen above, RTs  show the expected linear increase as the disparity between self-perspective and stimulus orientation increases ($E = 400.3, CI = [351.6 - 449.0], p < .001$).
+
+### Other Theta:
+
+```{r}
+plot_model(mod_inam_robot_centred, type = "pred", terms = c("other_theta_centred"))
+```
+
+As with the Animate Robot, participants did not take the perspective of the Inanimate Robot ($E = 0.8, CI = [-23.4 - 25.1], p = .946$). Instead of the predicted linear increase in RTs as stimulus was oriented away from the robot, participants RTs do not seem to be influenced in any way by the perspective of the robot.
+
+## Other Fixed effects and Interactions:
+### Exposure:
+
+```{r}
+plot_model(mod_inam_robot_centred, type = "pred", terms = c("Exposure"))
+```
+
+Generally participants RTs got faster over the course of the experiment, as participants were exposed to more trials they became better at the task ($E = -150.5, CI = [-200.7 - -100.3], p < .001$).  
+
+
+## Model Construciton:
+```{r, echo=T, results='hide'}
+mod_inam_robot_centred <- lmer(RT ~ self_theta_centred * Exposure + other_theta_centred * Exposure + 
+                        (1 + Exposure + self_theta_centred + other_theta_centred|subject) 
+                      ,data=filter(data, correct == 1, Agent == 'Inanimate Robot'), control = lmerControl(optimizer = "bobyqa"))
+```
+
+## Output of model:
+```{r}
+tab_model(mod_inam_robot_centred)
+```
+
+
+
+
+
