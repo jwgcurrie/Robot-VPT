@@ -1,6 +1,5 @@
 ---
 title: "VPT with Robots"
-
 author: 
 - Joel Currie^[University of Aberdeen, j.currie.22@abdn.ac.uk], Katrina Louise McDonough^[University of East Anglia], Agnieszka Wykowska^[Istituto Italiano di Tecnologia], Maria Elena Giannaccini^[University of Aberdeen], Patric Bach^[University of Aberdeen]
 
@@ -17,15 +16,18 @@ library(lme4)
 library(sjPlot)
 library(dplyr)
 ```
-# VPT with Robots
 
-## Response Time (RT) Models:
+# Experiment:
+Still in Progress...
+
+# Analysis:
+## Response Time (RT) Models
 * [**Full Model**](https://jwgcurrie.github.io/Robot-VPT/Full_model_RT.html)
 * [**Human Model**](https://jwgcurrie.github.io/Robot-VPT/Human_RT.html)
 * [**Animate Robot Model**](https://jwgcurrie.github.io/Robot-VPT/Animate_Robot_RT.html)
 * [**Inanimate Robot Model**](https://jwgcurrie.github.io/Robot-VPT/Inanimate_Robot_RT.html)
 
-## Error Rate Models:
+## Error Rate Models
 Still in Progress...
 
 
