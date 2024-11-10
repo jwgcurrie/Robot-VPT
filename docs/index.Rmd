@@ -1,6 +1,5 @@
 ---
 title: "VPT with Robots"
-subtitle: 'Response-Time (RT) Analysis: Full model'
 
 author: 
 - Joel Currie^[University of Aberdeen, j.currie.22@abdn.ac.uk], Katrina Louise McDonough^[University of East Anglia], Agnieszka Wykowska^[Istituto Italiano di Tecnologia], Maria Elena Giannaccini^[University of Aberdeen], Patric Bach^[University of Aberdeen]
