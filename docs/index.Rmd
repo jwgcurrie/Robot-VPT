@@ -1,5 +1,5 @@
 ---
-title: "VPT with Pepper"
+title: "VPT with Robots"
 subtitle: 'Response-Time (RT) Analysis: Full model'
 
 author: 
@@ -18,62 +18,16 @@ library(lme4)
 library(sjPlot)
 library(dplyr)
 ```
+# VPT with Robots
 
+## Response Time (RT) Models:
+* [**Full Model**](https://jwgcurrie.github.io/Robot-VPT/docs/Full_model_RT.html)
+* [**Human Model**](https://jwgcurrie.github.io/Robot-VPT/docs/Human_RT.html)
+* [**Animate Robot Model**](https://jwgcurrie.github.io/Robot-VPT/docs/Animate_Robot_RT.html)
+* [**Inanimate Robot Model**](https://jwgcurrie.github.io/Robot-VPT/docs/Inanimate_Robot_RT.html)
 
-# Full Model:
+## Error Rate Models:
 
-```{r}
-data <- read.csv("data_preprocessed.csv")
-
-mod_full_cat_center2 <- lmer(RT ~ self_theta_centred * Agent_cat * Exposure + other_theta_centred * Agent_cat * Exposure + 
-                              (1 + Exposure + self_theta_centred + other_theta_centred|subject) 
-                            ,data=filter(data, correct == 1), control = lmerControl(optimizer = "bobyqa"))
-```
-## Effects of Interest:
-### Self Theta:
-
-```{r}
-plot_model(mod_full_cat_center2, type = "pred", terms = c("self_theta_centred", "Agent_cat"))
-```
-
-As can be seen above, RTs  show the expected linear increase as the disparity between self-perspective and stimulus orientation increases ($E = 412.1, CI = [364.3 - 459.9], p < .001$).
-
-### Other Theta:
-
-```{r}
-plot_model(mod_full_cat_center2, type = "pred", terms = c("other_theta_centred", "Agent_cat"))
-```
-
-Our full-model failed to identify the main effect of Other-Perspective ($E = -0.2, CI = [-21.4 - 21.0], p = .986$), however detected an interaction between Other-Perspective, and the Human agent category ($E = 39.5, CI = [9.3 - 69.8], p = .010$) signalling that the expected VPT effect was only present in the group where participants were paired with other human participants.
-
-Though visually, there appears to be a systematic difference in RTs between the Animate Robot group and the Human/Inanimate Robot, this is not statistically significant. 
-
-## Other Fixed effects and Interactions:
-### Exposure:
-
-```{r}
-plot_model(mod_full_cat_center2, type = "pred", terms = c("Exposure"))
-```
-Generally participants RTs got faster over the course of the experiment, as participants were exposed to more trials they became better at the task ($E = -147.5, CI = [-204.0 - -91.0], p < .001$).  
-
-### Agent * Exposure* Other_theta:
-```{r}
-plot_model(mod_full_cat_center2, type = "pred", terms = c("Exposure", "other_theta_centred", "Agent_cat"))
-```
-
-We found a small interaction in the between the Human group, other theta and Exposure ($E = -107.3, CI = [-200.5 - -14.1], p = .024$). This interaction *could* imply that as the experiment progresses participants rely less on their partners perspective, and the VPT effect appears to get weaker. 
-
-## Model Construciton:
-```{r, echo=T, results='hide'}
-lmer(RT ~ self_theta_centred * Agent_cat * Exposure + other_theta_centred * Agent_cat * Exposure + 
-                              (1 + Exposure + self_theta_centred + other_theta_centred|subject) 
-                            ,data=filter(data, correct == 1), control = lmerControl(optimizer = "bobyqa"))
-```
-
-## Output of model:
-```{r}
-tab_model(mod_full_cat_center2)
-```
 
 
 
