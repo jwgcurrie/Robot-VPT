@@ -27,7 +27,7 @@ library(dplyr)
 * [**Inanimate Robot Model**](https://jwgcurrie.github.io/Robot-VPT/Inanimate_Robot_RT.html)
 
 ## Error Rate Models:
-
+Still in Progress...
 
 
 
