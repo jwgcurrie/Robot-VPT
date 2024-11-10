@@ -21,10 +21,10 @@ library(dplyr)
 # VPT with Robots
 
 ## Response Time (RT) Models:
-* [**Full Model**](https://jwgcurrie.github.io/Robot-VPT/docs/Full_model_RT.html)
-* [**Human Model**](https://jwgcurrie.github.io/Robot-VPT/docs/Human_RT.html)
-* [**Animate Robot Model**](https://jwgcurrie.github.io/Robot-VPT/docs/Animate_Robot_RT.html)
-* [**Inanimate Robot Model**](https://jwgcurrie.github.io/Robot-VPT/docs/Inanimate_Robot_RT.html)
+* [**Full Model**](https://jwgcurrie.github.io/Robot-VPT/Full_model_RT.html)
+* [**Human Model**](https://jwgcurrie.github.io/Robot-VPT/Human_RT.html)
+* [**Animate Robot Model**](https://jwgcurrie.github.io/docs/Animate_Robot_RT.html)
+* [**Inanimate Robot Model**](https://jwgcurrie.github.io/Robot-VPT/Inanimate_Robot_RT.html)
 
 ## Error Rate Models:
 
