@@ -20,7 +20,7 @@ library(dplyr)
 ```
 
 
-# Human Model:
+# Animate Robot Model:
 
 ```{r}
 data <- read.csv("data_preprocessed.csv")
