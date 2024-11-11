@@ -253,6 +253,29 @@ if (window.hljs) {
 
 
 
+<style type="text/css">
+
+div.csl-bib-body { }
+div.csl-entry {
+clear: both;
+margin-bottom: 0em;
+}
+.hanging div.csl-entry {
+margin-left:2em;
+text-indent:-2em;
+}
+div.csl-left-margin {
+min-width:2em;
+float:left;
+}
+div.csl-right-inline {
+margin-left:2em;
+padding-left:1em;
+}
+div.csl-indent {
+margin-left: 2em;
+}
+</style>
 
 
 
@@ -351,6 +374,8 @@ display: none;
 
 
 <h1 class="title toc-ignore">VPT with Robots</h1>
+<h3 class="subtitle">Response-Time (RT) Analysis: Classic Towards/Away
+Left/Right biases</h3>
 <h4 class="author">Joel Currie<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a>, Katrina Louise McDonough<a href="#fn2" class="footnote-ref" id="fnref2"><sup>2</sup></a>, Agnieszka Wykowska<a href="#fn3" class="footnote-ref" id="fnref3"><sup>3</sup></a>, Maria
 Elena Giannaccini<a href="#fn4" class="footnote-ref" id="fnref4"><sup>4</sup></a>, Patric Bach<a href="#fn5" class="footnote-ref" id="fnref5"><sup>5</sup></a></h4>
 <h4 class="date">2024-11-11</h4>
@@ -358,30 +383,147 @@ Elena Giannaccini<a href="#fn4" class="footnote-ref" id="fnref4"><sup>4</sup></a
 </div>
 
 
-<div id="experiment" class="section level1">
-<h1>Experiment:</h1>
-<p>Still in Progress…</p>
+<div id="classic-analysis" class="section level1">
+<h1>Classic Analysis:</h1>
+<p>To add credence both to our general findings, and newly developed
+analysis of VPT between agents, we show here a replication of the
+results indicated by the models in our primary analysis, using the
+classic analysis developed for this paradigm <span class="citation">[2–4]</span>.</p>
+<div id="towardaway-bias" class="section level2">
+<h2>Toward/Away Bias:</h2>
+<p>First, to verify that the mental rotation effect <span class="citation">[1]</span> was present, we use the towards/away summary
+measures developed in our previous work <span class="citation">[2–4]</span>. For each participant and group (Human,
+Animate Robot, Inanimate Robot), we averaged participant’s mean response
+times for each discrete character orientation, scaled by the negative
+cosine of the character orientation. This is expressed in the equaiton
+below. Positive values reflect slower responses for characters oriented
+away from the participant, the opposite is true for negative values.</p>
+<p><span class="math display">\[\begin{equation}
+  P_{self} = -RT cos(\theta_{self})
+\end{equation}\]</span></p>
+<p>A simple mixed factorial analysis of variance (ANOVA) was constructed
+with the between factor of Agent (Human, Animate Robot, Inanimate Robot)
+and a within factor of Agent Location (Left, Right), the dependent
+variable being <span class="math inline">\(P_{self}\)</span>.</p>
+<pre><code>## $ANOVA
+##                  Effect DFn DFd          SSn       SSd            F
+## 1           (Intercept)   1  87 1.440548e+06 163181.32 7.680272e+02
+## 2                 Agent   2  87 6.093199e+02 163181.32 1.624292e-01
+## 3       player_location   1  87 3.508419e+02  25749.46 1.185394e+00
+## 4 Agent:player_location   2  87 1.623461e-01  25749.46 2.742603e-04
+##              p p&lt;.05          pes
+## 1 6.048442e-45     * 8.982489e-01
+## 2 8.503334e-01       3.720114e-03
+## 3 2.792675e-01       1.344206e-02
+## 4 9.997258e-01       6.304796e-06</code></pre>
+<p>The ANOVA indicated a significant intercept (<span class="math inline">\(F(1,87) = 768, p &lt; .001, n_{p}^{2} =
+.899\)</span>), reflecting participants were slower at recognising
+letters oriented away from themselves, replicating the classic
+mental-rotation effect . No main effect of Agent was detected indicating
+that there were no statistical differences in the mental-rotation effect
+depending on the agent that participants were paired with <span class="math inline">\(p = .850\)</span>.</p>
 </div>
-<div id="analysis" class="section level1">
-<h1>Analysis:</h1>
-<div id="response-time-rt-models" class="section level2">
-<h2>Response Time (RT) Models</h2>
-<ul>
-<li><a href="https://jwgcurrie.github.io/Robot-VPT/Full_model_RT.html"><strong>Full
-Model</strong></a></li>
-<li><a href="https://jwgcurrie.github.io/Robot-VPT/Human_RT.html"><strong>Human
-Model</strong></a></li>
-<li><a href="https://jwgcurrie.github.io/Robot-VPT/Animate_Robot_RT.html"><strong>Animate
-Robot Model</strong></a></li>
-<li><a href="https://jwgcurrie.github.io/Robot-VPT/Inanimate_Robot_RT.html"><strong>Inanimate
-Robot Model</strong></a></li>
-<li><a href="https://jwgcurrie.github.io/Robot-VPT/classic_analysis_RT.html"><strong>Classic
-Analysis</strong></a></li>
-</ul>
+<div id="leftright-bias" class="section level2">
+<h2>Left/Right Bias:</h2>
+<p>The analogous Left/Right summary measure indexes how much quicker
+characters were recognised the more they were oriented leftwards
+compared to rightwards. For each participant, group (Human, Animate
+Robot, Inanimate Robot) and condition (Agent left, Agent right) average
+recognition times were calculated scaled by the sine of the discrete
+character orientations. Positive values reflect the slowing of
+recognition times for right-oriented compared to left-oriented
+characters, and the inverse for negative numbers. This is shown in the
+equation below.</p>
+<p><span class="math display">\[\begin{equation}
+    P_{other} = RT sin(\theta_{self})
+\end{equation}\]</span></p>
+<p>An analogous mixed factorial analysis of variance (ANOVA) was
+constructed with the between factor of Agent (Human, Animate Robot,
+Inanimate Robot) and a within factor of Agent Location (Left, Right),
+the dependent variable being the <span class="math inline">\(P_{other}\)</span> summary measure.</p>
+<pre><code>## $ANOVA
+##                  Effect DFn DFd      SSn      SSd          F           p p&lt;.05
+## 1           (Intercept)   1  87 9312.205 72712.24 11.1420281 0.001243421     *
+## 2                 Agent   2  87 1160.896 72712.24  0.6945044 0.502068557      
+## 3       player_location   1  87 1248.291 31714.00  3.4243980 0.067633636      
+## 4 Agent:player_location   2  87 3088.611 31714.00  4.2364443 0.017551118     *
+##          pes
+## 1 0.11352963
+## 2 0.01571472
+## 3 0.03787029
+## 4 0.08874654</code></pre>
+<p>The constructed ANOVA identified an interaction between Agent and
+Agent Location (<span class="math inline">\(F(2,87)) = 4.24, p = .018,
+n_{p}^{2} = 0.089\)</span>), aligning with our primary analysis. A
+repeated measures ANOVA was constructed to look at the contribution of
+this interaction by individual groups.</p>
+<div id="human-group" class="section level3">
+<h3>Human Group:</h3>
+<pre><code>## $ANOVA
+##            Effect DFn DFd       SSn      SSd         F           p p&lt;.05
+## 1     (Intercept)   1  29  981.0661 19799.36  1.436961 0.240335869      
+## 2 player_location   1  29 4324.2890 10946.90 11.455700 0.002061392     *
+##          pes
+## 1 0.04721107
+## 2 0.28316652</code></pre>
+<p>For the Human group a main effect of Agent Location was detected
+(<span class="math inline">\(F(1,29)) = 11.46, p = .002, n_{p}^{2} =
+0.283\)</span>), indicating that participants were faster at recognising
+leftward facing letters when another participant was located leftwards
+of them, and slower of rightward facing letters. Likewise participants
+were faster at recognising rightward facing letters when another
+participant was located to their right, and slower for leftward facing
+letters. This effect was not present in the Animate Robot group (<span class="math inline">\(p = .935\)</span>) or the Inanimate Robot group
+(<span class="math inline">\(p = .881\)</span>). These results replicate
+the findings of the models developed in our primary analysis entirely,
+ensuring confidence in both our newly developed analysis and our general
+findings.</p>
 </div>
-<div id="error-rate-models" class="section level2">
-<h2>Error Rate Models</h2>
-<p>Still in Progress…</p>
+<div id="animate-robot-group" class="section level3">
+<h3>Animate Robot Group:</h3>
+<pre><code>## $ANOVA
+##            Effect DFn DFd         SSn       SSd           F          p p&lt;.05
+## 1     (Intercept)   1  29 3172.528485 29226.577 3.147933665 0.08652392      
+## 2 player_location   1  29    1.521484  6587.342 0.006698153 0.93533442      
+##            pes
+## 1 0.0979202489
+## 2 0.0002309175</code></pre>
+</div>
+<div id="inanimate-robot-group" class="section level3">
+<h3>Inanimate Robot Group:</h3>
+<pre><code>## $ANOVA
+##            Effect DFn DFd      SSn      SSd          F           p p&lt;.05
+## 1     (Intercept)   1  29 6319.507 23686.31 7.73719983 0.009409284     *
+## 2 player_location   1  29   11.092 14179.76 0.02268501 0.881321839      
+##            pes
+## 1 0.2106094059
+## 2 0.0007816303</code></pre>
+<div id="refs" class="references csl-bib-body" entry-spacing="0">
+<div id="ref-Shepard1971" class="csl-entry">
+<div class="csl-left-margin">[1] </div><div class="csl-right-inline">Shepard, R.N. and Metzler, J. 1971. Mental
+rotation of three-dimensional objects. <em>Science</em>. 171, 3972
+(1971), 701–703.</div>
+</div>
+<div id="ref-Ward2022" class="csl-entry">
+<div class="csl-left-margin">[2] </div><div class="csl-right-inline">Ward, E. et al. 2022. Is implicit level-2
+visual perspective-taking embodied? Spontaneous perceptual simulation of
+others’ perspectives is not impaired by motor restriction. <em>Quarterly
+Journal of Experimental Psychology</em>. 75, (Jul. 2022), 1244–1258.
+DOI:https://doi.org/<a href="https://doi.org/10.1177/17470218221077102">10.1177/17470218221077102</a>.</div>
+</div>
+<div id="ref-Ward2020" class="csl-entry">
+<div class="csl-left-margin">[3] </div><div class="csl-right-inline">Ward, E. et al. 2020. Perspective taking as
+virtual navigation? Perceptual simulation of what others see reflects
+their location in space but not their gaze. <em>Cognition</em>. 199,
+(Jun. 2020). DOI:https://doi.org/<a href="https://doi.org/10.1016/j.cognition.2020.104241">10.1016/j.cognition.2020.104241</a>.</div>
+</div>
+<div id="ref-Ward2019" class="csl-entry">
+<div class="csl-left-margin">[4] </div><div class="csl-right-inline">Ward, E. et al. 2019. Spontaneous vicarious
+perception of the content of another’s visual perspective. <em>Current
+Biology</em>. 29, (Mar. 2019), 874–880.e4. DOI:https://doi.org/<a href="https://doi.org/10.1016/j.cub.2019.01.046">10.1016/j.cub.2019.01.046</a>.</div>
+</div>
+</div>
+</div>
 </div>
 </div>
 <div class="footnotes footnotes-end-of-document">

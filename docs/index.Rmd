@@ -26,6 +26,7 @@ Still in Progress...
 * [**Human Model**](https://jwgcurrie.github.io/Robot-VPT/Human_RT.html)
 * [**Animate Robot Model**](https://jwgcurrie.github.io/Robot-VPT/Animate_Robot_RT.html)
 * [**Inanimate Robot Model**](https://jwgcurrie.github.io/Robot-VPT/Inanimate_Robot_RT.html)
+* [**Classic Analysis**](https://jwgcurrie.github.io/Robot-VPT/classic_analysis_RT.html)
 
 ## Error Rate Models
 Still in Progress...

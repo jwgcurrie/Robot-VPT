@@ -1,0 +1,139 @@
+---
+title: "VPT with Robots"
+subtitle: 'Response-Time (RT) Analysis: Classic Towards/Away Left/Right biases'
+
+author: 
+- Joel Currie^[University of Aberdeen, j.currie.22@abdn.ac.uk], Katrina Louise McDonough^[University of East Anglia], Agnieszka Wykowska^[Istituto Italiano di Tecnologia], Maria Elena Giannaccini^[University of Aberdeen], Patric Bach^[University of Aberdeen]
+
+
+date: "`r Sys.Date()`"
+output: html_document
+bibliography: bibliography.bib
+csl: acm-sig-proceedings.csl
+---
+
+```{r setup, include=FALSE}
+eval = TRUE
+knitr::opts_chunk$set(echo = FALSE)
+knitr::opts_chunk$set(warning = FALSE, message = FALSE) 
+rm(list = ls())
+library(lme4)
+library(sjPlot)
+library(dplyr)
+library(ez)
+library(psychReport)
+
+```
+
+
+# Classic Analysis:
+To add credence both to our general findings, and newly developed analysis of VPT between agents, we show here a replication of the results indicated by the models in our primary analysis, using the classic analysis developed for this paradigm [@Ward2019; @Ward2020; @Ward2022]. 
+
+## Toward/Away Bias:
+First, to verify that the mental rotation effect [@Shepard1971] was present, we use the towards/away summary measures developed in our previous work [@Ward2019; @Ward2020; @Ward2022]. For each participant and group (Human, Animate Robot, Inanimate Robot), we averaged participant's mean response times for each discrete character orientation, scaled by the negative cosine of the character orientation. This is expressed in the equaiton below. Positive values reflect slower responses for characters oriented away from the participant, the opposite is true for negative values. 
+
+
+\begin{equation}
+  P_{self} = -RT cos(\theta_{self})
+\end{equation}
+
+A simple mixed factorial analysis of variance (ANOVA) was constructed with the between factor of Agent (Human, Animate Robot, Inanimate Robot) and a within factor of Agent Location (Left, Right), the dependent variable being $P_{self}$.
+
+```{r}
+data <- read.csv("data_preprocessed.csv")
+
+
+data_sum <- filter(data, correct == TRUE) %>% 
+  group_by(subject, player_location, Player_letter_angle, Agent) %>%
+  summarise(RT = mean(RT))
+
+data_sum['LR_bias'] <- data_sum$RT * sin(data_sum$Player_letter_angle * (pi/180))
+data_sum['TA_bias'] <- data_sum$RT * -cos(data_sum$Player_letter_angle * (pi/180))
+
+data_sum <- data_sum %>% group_by(subject, player_location, Agent) %>%
+  summarise(LR_bias = mean(LR_bias),
+            TA_bias = mean(TA_bias))
+
+data_sum_Human <- filter(data_sum, Agent == 'Human')
+data_sum_Animate_Robot <- filter(data_sum, Agent == 'Animate Robot')
+data_sum_Inanimate_Robot <- filter(data_sum, Agent == 'Inanimate Robot')
+
+
+classic_TA_bias <- ezANOVA(data=data_sum, 
+                             dv=TA_bias, 
+                             wid=.(subject), 
+                             within=.(player_location),
+                             type = 3,
+                             detailed = TRUE,
+                             between = Agent)
+aovEffectSize(classic_TA_bias, effectSize = "pes")
+
+
+```
+
+The ANOVA indicated a significant intercept ($F(1,87) = 768, p < .001, n_{p}^{2} = .899$), reflecting participants were slower at recognising letters oriented away from themselves, replicating the classic mental-rotation effect \cite{Shepard1971}. No main effect of Agent was detected indicating that there were no statistical differences in the mental-rotation effect depending on the agent that participants were paired with $p = .850$. 
+
+
+## Left/Right Bias:
+
+
+The analogous Left/Right summary measure indexes how much quicker characters were recognised the more they were oriented leftwards compared to rightwards. For each participant, group (Human, Animate Robot, Inanimate Robot) and condition (Agent left, Agent right) average recognition times were calculated scaled by the sine of the discrete character orientations. Positive values reflect the slowing of recognition times for right-oriented compared to left-oriented characters, and the inverse for negative numbers. This is shown in the equation below.
+
+\begin{equation}
+    P_{other} = RT sin(\theta_{self})
+\end{equation}
+
+
+An analogous mixed factorial analysis of variance (ANOVA) was constructed with the between factor of Agent (Human, Animate Robot, Inanimate Robot) and a within factor of Agent Location (Left, Right), the dependent variable being the $P_{other}$ summary measure.
+
+```{r}
+classic_LR_bias <- ezANOVA(data=data_sum, 
+                             dv=LR_bias, 
+                             wid=.(subject), 
+                             within=.(player_location),
+                             type = 3,
+                             detailed = TRUE,
+                             between = Agent)
+aovEffectSize(classic_LR_bias, effectSize = "pes")
+```
+
+The constructed ANOVA identified an interaction between Agent and Agent Location ($F(2,87)) = 4.24, p = .018, n_{p}^{2} = 0.089$), aligning with our primary analysis. A repeated measures ANOVA was constructed to look at the contribution of this interaction by individual groups.
+
+### Human Group:
+```{r}
+classic_LR_bias_human <- ezANOVA(data=data_sum_Human, 
+                             dv=LR_bias, 
+                             wid=.(subject), 
+                             within=.(player_location),
+                             type = 3,
+                             detailed = TRUE)
+aovEffectSize(classic_LR_bias_human, effectSize = "pes")
+```
+For the Human group a main effect of Agent Location was detected ($F(1,29)) = 11.46, p = .002, n_{p}^{2} = 0.283$), indicating that participants were faster at recognising leftward facing letters when another participant was located leftwards of them, and slower of rightward facing letters. Likewise participants were faster at recognising rightward facing letters when another participant was located to their right, and slower for leftward facing letters. This effect was not present in the Animate Robot group ($p = .935$) or the Inanimate Robot group ($p = .881$). These results replicate the findings of the models developed in our primary analysis entirely, ensuring confidence in both our newly developed analysis and our general findings. 
+
+
+### Animate Robot Group:
+```{r}
+classic_LR_bias_human <- ezANOVA(data=data_sum_Animate_Robot, 
+                             dv=LR_bias, 
+                             wid=.(subject), 
+                             within=.(player_location),
+                             type = 3,
+                             detailed = TRUE)
+aovEffectSize(classic_LR_bias_human, effectSize = "pes")
+```
+
+
+
+### Inanimate Robot Group:
+```{r}
+classic_LR_bias_human <- ezANOVA(data=data_sum_Inanimate_Robot, 
+                             dv=LR_bias, 
+                             wid=.(subject), 
+                             within=.(player_location),
+                             type = 3,
+                             detailed = TRUE)
+aovEffectSize(classic_LR_bias_human, effectSize = "pes")
+```
+
+
