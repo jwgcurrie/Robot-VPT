@@ -17,20 +17,24 @@ library(sjPlot)
 library(dplyr)
 ```
 
-# Experiment:
-Still in Progress...
-
 # Analysis:
 ## Response Time (RT) Models
 * [**Full Model**](https://jwgcurrie.github.io/Robot-VPT/Full_model_RT.html)
 * [**Human Model**](https://jwgcurrie.github.io/Robot-VPT/Human_RT.html)
 * [**Animate Robot Model**](https://jwgcurrie.github.io/Robot-VPT/Animate_Robot_RT.html)
 * [**Inanimate Robot Model**](https://jwgcurrie.github.io/Robot-VPT/Inanimate_Robot_RT.html)
-* [**Classic Analysis**](https://jwgcurrie.github.io/Robot-VPT/classic_analysis_RT.html)
 
 ## Error Rate Models
-Still in Progress...
+* [**Full Model**](https://jwgcurrie.github.io/Robot-VPT/Full_model_Error.html)
+* [**Human Model**](https://jwgcurrie.github.io/Robot-VPT/Human_Error.html)
+* [**Animate Robot Model**](https://jwgcurrie.github.io/Robot-VPT/Animate_Robot_Error.html)
+* [**Inanimate Robot Model**](https://jwgcurrie.github.io/Robot-VPT/Inanimate_Robot_Error.html)
 
+## Classic RT Analysis
+* [**TA and LR Bias**](https://jwgcurrie.github.io/Robot-VPT/dataset.csv)
+
+# **Materials:**
+<a id="raw-url" href="https://raw.githubusercontent.com/jwgcurrie/Robot-VPT/refs/heads/main/docs/data_preprocessed.csv">**dataset.csv**</a>
 
 
 
